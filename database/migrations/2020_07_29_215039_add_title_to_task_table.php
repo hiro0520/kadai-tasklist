@@ -15,7 +15,11 @@ class AddTitleToTaskTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->string('status', 10);
-            //
+            $table->string('name');
+            $table->string('email');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
         });
     }
 
@@ -26,8 +30,6 @@ class AddTitleToTaskTable extends Migration
      */
     public function down()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $chema->dropclum('status');
-        });
+        Schema::dropIfExists('tasks');
     }
 }

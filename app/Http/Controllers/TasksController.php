@@ -15,14 +15,33 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //メッセージ一覧を取得
-        $tasks = Task::all();
+
+        $data = [];
+        if (\Auth::check()) { // 認証済みの場合
+            // 認証済みユーザを取得
+            // メッセージ一覧を取得
+            $tasks = Task::all();
+            
+            // logger('これだよ。ログだよ');
+            // それを表示
+            return view ('tasks.index',[
+                'tasks'=>$tasks,
+                ]);            
+            // $data = [
+            //     'user' => $user,
+            // ];
+        }
         
-        // logger('これだよ。ログだよ');
-        // それを表示
-        return view ('tasks.index',[
-            'tasks'=>$tasks,
-            ]);
+        return view('welcome', $data);
+
+        // // メッセージ一覧を取得
+        // $tasks = Task::all();
+        
+        // // logger('これだよ。ログだよ');
+        // // それを表示
+        // return view ('tasks.index',[
+        //     'tasks'=>$tasks,
+        //     ]);
     }
 
     /**
